@@ -96,48 +96,66 @@ function renderizarPreguntas() {
 }
 
 function calcularResultado() {
-    let puntaje = 0;
+    let aciertos = 0;
+    let fallos = 0;
+    let vacias = 0;
 
     preguntasSeleccionadas.forEach((p, index) => {
         const opciones = document.getElementsByName(`pregunta-${index}`);
         const bolita = document.getElementById(`bolita-${index}`);
-        let respondidaCorrectamente = false;
+        let marcada = null;
 
         opciones.forEach(radio => {
-            const label = radio.closest('.opcion-item');
-            
-            if (radio.checked) {
-                if (radio.value === p.correcta) {
-                    label.classList.add('correcta');
-                    respondidaCorrectamente = true;
-                } else {
-                    label.classList.add('incorrecta');
-                }
-            }
-
-            // Resaltar visualmente cuál era la correcta
-            if (radio.value === p.correcta) {
-                label.classList.add('es-la-correcta');
-            }
-
-            radio.disabled = true; // Bloquear para que no cambien respuestas
+            if (radio.checked) marcada = radio;
+            radio.disabled = true;
         });
 
-        // Actualizar colores del sidebar
+        const esCorrecta = marcada && marcada.value === p.correcta;
+
+        // Aplicar estilos a las etiquetas
+        opciones.forEach(radio => {
+            const label = radio.closest('.opcion-item');
+            if (radio.value === p.correcta) label.classList.add('es-la-correcta');
+            if (radio.checked && !esCorrecta) label.classList.add('incorrecta');
+            if (radio.checked && esCorrecta) label.classList.add('correcta');
+        });
+
+        // Actualizar estadísticas y bolitas
         bolita.classList.remove('respondida');
-        if (respondidaCorrectamente) {
+        if (esCorrecta) {
+            aciertos++;
             bolita.classList.add('bolita-exito');
-            puntaje++;
         } else {
             bolita.classList.add('bolita-error');
+            if (!marcada) vacias++;
+            else fallos++;
         }
     });
 
-    alert(`Evaluación finalizada.\nResultado: ${puntaje} / ${preguntasSeleccionadas.length}`);
-    
-    // Cambiar botones
+    mostrarResumen(aciertos, fallos, vacias);
     document.getElementById('btn-finalizar').classList.add('hidden');
     document.getElementById('btn-reiniciar').classList.remove('hidden');
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mostrarResumen(ok, err, blank) {
+    const container = document.getElementById('preguntas-container');
+    const total = preguntasSeleccionadas.length;
+    const porcentaje = Math.round((ok / total) * 100);
+
+    const html = `
+        <div class="resumen-final">
+            <h2>Resultados de la Evaluación</h2>
+            <div class="stats-grid">
+                <div class="stat-card success"><span class="stat-num">${ok}</span><span>Aciertos</span></div>
+                <div class="stat-card danger"><span class="stat-num">${err}</span><span>Errores</span></div>
+                <div class="stat-card neutral"><span class="stat-num">${blank}</span><span>Vacías</span></div>
+            </div>
+            <div class="progreso-total">
+                <p>Puntuación: <strong>${porcentaje}%</strong></p>
+                <div class="barra-fondo"><div class="barra-progreso" style="width: ${porcentaje}%"></div></div>
+            </div>
+        </div>
+    `;
+    container.insertAdjacentHTML('afterbegin', html);
 }
