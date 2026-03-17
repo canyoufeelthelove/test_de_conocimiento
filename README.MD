@@ -21,7 +21,7 @@ No requiere servidores ni bases de datos. Al ser un proyecto "Frontend-Only", pu
    ```bash
    git clone [https://github.com/TU_USUARIO/tu-repositorio.git](https://github.com/TU_USUARIO/tu-repositorio.git)
 
-``[
+```[
   {
     "tema": "Historia",
     "pregunta": "¿En qué año se descubrió América?",
@@ -34,4 +34,4 @@ No requiere servidores ni bases de datos. Al ser un proyecto "Frontend-Only", pu
     "opciones": ["GNU Privacy Guard", "General Personal Guide", "Global Private Gate"],
     "correcta": "GNU Privacy Guard"
   }
-]``
+]```
