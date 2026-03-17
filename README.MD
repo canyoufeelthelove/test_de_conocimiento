@@ -1,4 +1,4 @@
-# Evaluador de Lectura IA - Pro 🧠
+# Evaluador de Lectura IA - 🧠
 
 Este es un sistema de evaluación interactivo basado en la web que permite cargar cuestionarios personalizados mediante archivos JSON. La aplicación genera una evaluación aleatoria de 20 preguntas, califica en tiempo real y proporciona retroalimentación visual detallada al finalizar.
 
