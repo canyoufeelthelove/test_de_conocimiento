@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz IA - Evaluador Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Evaluador de Lectura IA</h1>
+            
+            <div id="display-tema" class="tema-badge hidden">
+                EVALUANDO: <span id="nombre-tema-header"></span>
+            </div>
+
+            <div class="upload-section">
+                <label for="file-input" class="custom-file-upload">
+                    Seleccionar JSON de preguntas
+                </label>
+                <input type="file" id="file-input" accept=".json">
+            </div>
+        </header>
+
+        <main id="quiz-area" class="hidden">
+            <div class="quiz-layout">
+                <section id="preguntas-container"></section>
+
+                <aside id="sidebar-derecho">
+                    <div class="sidebar-content">
+                        <h2 id="tema-titulo">Tema</h2>
+                        <p>Estado de avance:</p>
+                        <div id="indicador-progreso"></div>
+                        <hr>
+                        <button id="btn-finalizar" onclick="calcularResultado()">Finalizar Intento</button>
+                        <button id="btn-reiniciar" class="hidden" onclick="location.reload()">Cargar nuevo archivo</button>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <div id="welcome-msg">
+            <p>Sube un archivo JSON para generar tu evaluación de 20 preguntas aleatorias.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

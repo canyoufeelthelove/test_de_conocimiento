@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "tipo": "multiple",
+    "tema": "HTML5",
+    "pregunta": "¿Para qué sirve la etiqueta <main>?",
+    "opciones": [
+      "Para el contenido principal",
+      "Para el pie de página",
+      "Para enlaces",
+      "Para scripts",
+      "Para metadatos"
+    ],
+    "correcta": "Para el contenido principal"
+  },
+  {
+    "id": 2,
+    "tipo": "verdadero_falso",
+    "tema": "Python",
+    "pregunta": "En Python, la expresión 5 > 10 devuelve True.",
+    "opciones": ["Verdadero", "Falso"],
+    "correcta": "Falso"
+  }
+]
